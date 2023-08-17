@@ -47,7 +47,7 @@ const Form = () => {
     e.preventDefault();
     const contact = {
       name,
-      phone,
+      number: phone,
     };
     onAddedContact(contact);
     resetForm();

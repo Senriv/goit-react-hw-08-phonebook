@@ -23,7 +23,7 @@ function ContactList() {
       {visibleContacts.map(contact => (
         <Contact key={contact.id}>
           <ContactName>{contact.name}:</ContactName>
-          <p>{contact.phone}</p>
+          <p>{contact.number}</p>
           <ContactBtnDelete onClick={() => onContactRemoving(contact.id)}>
             Delete
           </ContactBtnDelete>
