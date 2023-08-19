@@ -2,6 +2,13 @@ import Notiflix from 'notiflix';
 import { signUpThunk } from 'redux/userAsyncThunk';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import {
+  Container,
+  Form,
+  FormLabel,
+  FormInput,
+  FormBtn,
+} from './Registration.styled';
 
 const Registration = () => {
   const dispatch = useDispatch();
@@ -40,37 +47,45 @@ const Registration = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleOnSubmit}>
-        <label>Your name</label>
-        <input
-          onChange={handleChange}
-          name="name"
-          value={name}
-          type="text"
-          placeholder="Enter your name"
-        />
-        <label>Email</label>
-        <input
-          onChange={handleChange}
-          name="email"
-          value={email}
-          type="email"
-          placeholder="Enter email"
-        />
-        <label>Password</label>
-        <input
-          onChange={handleChange}
-          type="password"
-          name="password"
-          value={password}
-          placeholder="Enter password"
-          required
-        />
+    <Container>
+      <Form onSubmit={handleOnSubmit}>
+        <FormLabel>
+          Your name
+          <FormInput
+            onChange={handleChange}
+            name="name"
+            value={name}
+            type="text"
+            placeholder="Enter your name"
+          />
+        </FormLabel>
 
-        <button type="submit">Sign up</button>
-      </form>
-    </div>
+        <FormLabel>
+          Email
+          <FormInput
+            onChange={handleChange}
+            name="email"
+            value={email}
+            type="email"
+            placeholder="Enter email"
+          />
+        </FormLabel>
+
+        <FormLabel>
+          Password
+          <FormInput
+            onChange={handleChange}
+            type="password"
+            name="password"
+            value={password}
+            placeholder="Enter password"
+            required
+          />
+        </FormLabel>
+
+        <FormBtn type="submit">Sign up</FormBtn>
+      </Form>
+    </Container>
   );
 };
 

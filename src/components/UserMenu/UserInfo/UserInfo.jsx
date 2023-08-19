@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from 'redux/selectors';
 import { logoutThunk } from 'redux/userAsyncThunk';
-import { Link } from 'react-router-dom';
+import { UserLink, UserBtn } from './UserInfo.styled';
 
 const UserInfo = () => {
   const user = useSelector(selectUser);
@@ -13,13 +13,13 @@ const UserInfo = () => {
     user && (
       <>
         <li>
-          <Link to="/contacts">Contacts</Link>
+          <UserLink to="/contacts">Contacts</UserLink>
         </li>
         <li>
           <p>{user.email}</p>
         </li>
         <li>
-          <button onClick={handleSubmit}>Log Out</button>
+          <UserBtn onClick={handleSubmit}>Log Out</UserBtn>
         </li>
       </>
     )

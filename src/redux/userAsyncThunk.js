@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import Notiflix from 'notiflix';
 import {
   token,
   signUpUser,
@@ -13,6 +14,7 @@ export const signUpThunk = createAsyncThunk(
     try {
       const data = await signUpUser(credentials);
       token.set(data.token);
+      Notiflix.Notify.success(`${credentials.name} account successfully created`);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -26,6 +28,7 @@ export const loginThunk = createAsyncThunk(
     try {
       const data = await loginUser(credentials);
       token.set(data.token);
+      Notiflix.Notify.success('Authorization was successful');
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -39,6 +42,7 @@ export const logoutThunk = createAsyncThunk(
     try {
       await logoutUser();
       token.unSet();
+      Notiflix.Notify.success('You are logged out');
     } catch (error) {
       return rejectWithValue(error.message);
     }

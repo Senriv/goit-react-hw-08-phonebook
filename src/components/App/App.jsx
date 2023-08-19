@@ -1,11 +1,11 @@
 import { Suspense, lazy, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-
 import { refreshUserThunk } from 'redux/userAsyncThunk';
 import { PublicRoute } from 'components/UserMenu/PublicRout';
 import { PrivateRoute } from 'components/UserMenu/PrivateRout';
 import Navigation from 'components/UserMenu/Navigation/Navigation';
+import { Container } from './App.styled';
 
 const Registration = lazy(() => import('pages/Registration/Registration'));
 const Login = lazy(() => import('pages/Login/Login'));
@@ -19,7 +19,7 @@ export const App = () => {
   }, [dispatch]);
 
   return (
-    <div>
+    <Container>
       <Suspense>
         <Navigation />
         <Routes>
@@ -32,7 +32,7 @@ export const App = () => {
           </Route>
         </Routes>
       </Suspense>
-    </div>
+    </Container>
   );
 };
 

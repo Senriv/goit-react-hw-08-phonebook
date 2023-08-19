@@ -1,38 +1,44 @@
 import UserInfo from '../UserInfo/UserInfo';
-import { Link } from 'react-router-dom';
+
 import { useSelector } from 'react-redux';
 import { selectToken, selectUser } from 'redux/selectors';
+import { Header, NavItems, NavItem, NavLink, Title } from './Navigation.styled';
 
 const Navigation = () => {
   const user = useSelector(selectUser);
   const token = useSelector(selectToken) ?? '';
 
   return (
-    <header>
+    <Header>
       <nav>
-        <ul>
+        <NavItems>
           {!user && (
             <>
-              {token && <Link to="/contacts">Contacts</Link>}
-              <li>
-                <Link to="/signup">Sign Up</Link>
-              </li>
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
+              {token && (
+                <NavItem>
+                  <NavLink to="/contacts">Contacts</NavLink>
+                </NavItem>
+              )}
+              <NavItem>
+                <NavLink to="/signup">Sign Up</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink to="/login">Login</NavLink>
+              </NavItem>
             </>
           )}
 
           <UserInfo />
-        </ul>
+        </NavItems>
       </nav>
 
       {user ? (
-        <h1>Hello {user.name}! Welcome to your contacts.</h1>
+        <Title>Hello {user.name}! Welcome to your contacts.</Title>
       ) : (
-        <h1>Welcome guest! Please login or sing up.</h1>
+        <Title>Welcome guest! Please login or sing up.</Title>
+
       )}
-    </header>
+    </Header>
   );
 };
 

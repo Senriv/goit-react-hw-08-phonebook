@@ -2,6 +2,13 @@ import Notiflix from 'notiflix';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginThunk } from 'redux/userAsyncThunk';
+import {
+  Container,
+  Form,
+  FormLabel,
+  FormInput,
+  FormBtn,
+} from './Login.styled';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -36,33 +43,33 @@ const LoginPage = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleOnSubmit}>
-        <label>
+    <Container>
+      <Form onSubmit={handleOnSubmit}>
+        <FormLabel>
           Email
-          <input
+          <FormInput
             onChange={handleChange}
             name="email"
             value={email}
             type="email"
             placeholder="Enter email"
           />
-        </label>
+        </FormLabel>
 
-        <label>
+        <FormLabel>
           Password
-          <input
+          <FormInput
             onChange={handleChange}
             type="password"
             name="password"
             value={password}
-            placeholder="Password"
+            placeholder="Enter password"
           />
-        </label>
+        </FormLabel>
 
-        <button type="submit">Log in</button>
-      </form>
-    </div>
+        <FormBtn type="submit">Log in</FormBtn>
+      </Form>
+    </Container>
   );
 };
 

@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getContacts, addContacts, deleteContacts } from '../services/metodsContactsAPI';
 import { token } from 'services/metodsUserAPI';
+import Notiflix from 'notiflix';
 
 export const getContactsThunk = createAsyncThunk(
   'contacts/allContacts',
@@ -24,6 +25,7 @@ export const addContactsThunk = createAsyncThunk(
   async (contact, { rejectWithValue }) => {
     try {
       const data = addContacts(contact);
+      Notiflix.Notify.success(`Contact ${contact.name} added`);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
