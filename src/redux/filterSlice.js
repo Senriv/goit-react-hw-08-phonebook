@@ -1,18 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit'; // Импорт функции createSlice из библиотеки @reduxjs/toolkit
 
-const filterInitialState = '';
+const filterInitialState = ''; // Инициализация начального состояния фильтра
 
+// Создание среза состояния и редуктора для фильтрации
 const filterSlice = createSlice({
-  name: 'filter',
-  initialState: filterInitialState,
+  name: 'filter', // Название среза
+  initialState: filterInitialState, // Исходное состояние фильтра
   reducers: {
+    // Добавление действия setFilter
     setFilter(state, action) {
-      return (state = action.payload);
+      return (state = action.payload); // Установка нового значения фильтра
     },
   },
 });
 
-
-export const { setFilter } = filterSlice.actions;
-
-export const filterReducer = filterSlice.reducer;
+// Экспорт действий и редуктора для фильтрации
+export const { setFilter } = filterSlice.actions; // Экспорт действия setFilter
+export const filterReducer = filterSlice.reducer; // Экспорт редуктора filterReducer

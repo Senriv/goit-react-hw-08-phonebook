@@ -1,19 +1,20 @@
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getContactsThunk, addContactsThunk } from 'redux/contactsAsyncThunk';
-import { selectContacts } from 'redux/selectors';
-import { FormEl, FormLable, FormInput, FormBtn } from './Form.styled';
+import { useState, useEffect } from 'react'; // Импорт компонента React
+import { useDispatch, useSelector } from 'react-redux'; // Импорт хуков useDispatch и useSelector из Redux
+import { getContactsThunk, addContactsThunk } from 'redux/contactsAsyncThunk'; // Импорт thunk для получения и добавления контактов из Redux
+import { selectContacts } from 'redux/selectors'; // Импорт селектора для списка контактов из Redux
+import { FormEl, FormLable, FormInput, FormBtn } from './Form.styled'; // Импорт стилизованных компонентов для формы
 
 const Form = () => {
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-  const contacts = useSelector(selectContacts);
-  const dispatch = useDispatch();
+  const [name, setName] = useState(''); // Локальное состояние для имени
+  const [phone, setPhone] = useState(''); // Локальное состояние для номера
+  const contacts = useSelector(selectContacts); // Получение списка контактов из Redux с помощью селектора
+  const dispatch = useDispatch(); // Получение экземпляра функции dispatch из Redux
 
   useEffect(() => {
-    dispatch(getContactsThunk());
-  }, [dispatch]);
+    dispatch(getContactsThunk()); // Вызов thunk для получения контактов при монтировании компонента
+  }, [dispatch]); // Зависимость пуста, поэтому thunk вызывается только один раз при монтировании
 
+  // Обработчик изменения значений полей
   const handleChange = e => {
     const { name, value } = e.currentTarget;
 
@@ -31,28 +32,31 @@ const Form = () => {
     }
   };
 
+  // Функция для добавления нового контакта
   const onAddedContact = data => {
     if (
       contacts.find(
         contact => contact.name.toLowerCase() === data.name.toLowerCase()
       )
     ) {
-      alert(`${data.name} is already in contacts`);
+      alert(`${data.name} is already in contacts`); // Проверка на наличие контакта с таким именем
       return;
     }
-    dispatch(addContactsThunk(data));
+    dispatch(addContactsThunk(data)); // Вызов thunk для добавления контакта
   };
 
+  // Обработчик отправки формы
   const handleSubmit = e => {
     e.preventDefault();
     const contact = {
       name,
       number: phone,
     };
-    onAddedContact(contact);
-    resetForm();
+    onAddedContact(contact); // Вызов функции для добавления нового контакта
+    resetForm(); // Сброс формы
   };
 
+  // Функция для сброса состояния формы
   const resetForm = () => {
     setName('');
     setPhone('');
